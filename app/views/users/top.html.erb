@@ -1,0 +1,76 @@
+<div class="profile-container w-75 d-flex mx-auto justify-content-around align-items-center border-bottom py-5">
+  <section>
+    <h2>User info</h2>
+    <% if @user %>
+      <%= image_tag @user.get_profile_image(100, 100) %>
+      <table>
+        <thead>
+          <tr>
+            <th>name</th>
+            <th class="profile-name display-4"><%= @user.name %></th>
+            <th>introduction</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    <% else %>
+      <p>No user found.</p>
+    <% end %>
+  </section>
+
+  <% if @user && @user.id == current_user&.id %>
+    <div class="mt-auto">
+      <p><%= link_to "プロフィール編集", edit_user_path(@user), class:"text-dark" %></p>
+    </div>
+  <% end %>
+
+  <section>
+    <h2>New book</h1>
+    <% if @book.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= @book.errors.count %> errors prohibited this book from being saved:</h2>
+        <ul>
+          <% @book.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <%= form_with model: @book do |f| %>
+      <h4>Title</h4>
+      <%= f.text_field :title %>
+
+      <h4>Opinion</h4>
+      <%= f.text_area :body %>
+
+      <%= f.submit 'Create Book' %>
+    <% end %>
+  </section>
+
+  <section>
+    <h2>Users</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>image</th>
+          <th>name</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @books.each do |book| %>
+          <tr>
+            <td><%= image_tag book.user.get_profile_image(100, 100) %></td>
+            <td class="profile-name display-4"><%= book.user.name %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </section>
+</div>
