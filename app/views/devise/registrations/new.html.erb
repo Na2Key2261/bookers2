@@ -1,35 +1,36 @@
   <div class="container">
-    <div class="row no-gutters">
-      <div class="col-md-5 col-sm-10 mx-2 mx-sm-auto text-center shadow-lg rounded px-0 my-5">
-        <h5 class="text-dark bg-light py-4 mb-0">Sign up</h5>
+    <div class="row">
+      <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0">
+        <h2 class="text-dark bg-light py-4 mb-0">Sign up</h2>
         <div class="form-body p-4"></div>
           <%= form_with model: @user, url: user_registration_path, id: 'new_user', class: 'new_user', local: true do |f| %>
             <%= render "devise/shared/error_messages", resource: resource %>
-            <div class="input-group mb-3">
+            <div class="field">
               <div class="input-group-prepend">
                 <p>Name</p>
               </div>
               <%= f.text_field :name, autofocus: true, class:"form-control", id:"inputName"%>
             </div>
-            <div class="input-group mb-3">
+            <div class="field">
               <div class="input-group-prepend">
                 <p>Email</p>
               </div>
               <%= f.email_field :email, autofocus: true, class:"form-control", id:"inputEmail"%>
             </div>
-            <div class="input-group mb-3">
+            <div class="field">
               <div class="input-group-prepend">
                 <p>Password (6 characters minimum)</p>
+                
               </div>
               <%= f.password_field :password, autocomplete: "off", class:"form-control", id:"inputPassword" %>
             </div>
-            <div class="input-group mb-3">
+            <div class="field">
               <div class="input-group-prepend">
                 <p>Password confirmation</p>
               </div>
               <%= f.password_field :password_confirmation, autocomplete: "off", class:"form-control", id:"inputConfirmPassword" %>
             </div>
-            <%= f.submit "Sign up", class:"btn btn-block btn-info mt-5" %>
+            <%= f.submit "Sign up", class:"btn btn-success " %>
           <% end %>
           <%= render "devise/shared/links" %>
         </div>

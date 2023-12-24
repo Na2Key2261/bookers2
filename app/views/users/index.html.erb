@@ -1,30 +1,36 @@
-
-
-  <section>
+<div class="text-success">
+  <%= flash[:notice] %>
+</div>
+<div class='container   justify-content-around align-items-center border-bottom py-5'>
+  <div class='row'>
+  <section class='col-md-3'>
           <h2>User info</h2>
           <% if @user.present? && @user.respond_to?(:get_profile_image) %>
             <%= image_tag @user.get_profile_image(100, 100), alt: 'sample-author1.jpg' %>
           <% end %>
 
         <table>
-            <thead>
+            <tbody>
               <tr>
                 <th>name</th>
-                <th class="profile-name display-4"><%= @user&.name %></th>
+                <th><%= @user.name %></th>
+                </tr>
+              <tr>
                 <th>introduction</th>
+                <th><%= @user.introduction %></th>
               </tr>
-                <th></th>
-            </thead>
+            </tbody>
           </table>
-        </section>
+
 
     <% if @user && @user.id == current_user&.id %>
       <div class="mt-auto">
-        <p><%= link_to "プロフィール編集", edit_user_path(@user), class:"text-dark" %></p>
+        <p><%= link_to  edit_user_path(@user), class: "btn btn-outline-secondary btn-block" do %><i class="fas fa-user-cog"></i><% end %></p
       </div>
     <% end %>
 
-  <section>
+
+
     <h2>New book</h1>
     <% if @book && @book.errors.any? %>
       <div id="error_explanation">
@@ -44,39 +50,37 @@
       <h4>Opinion</h4>
       <%= f.text_area :body %>
 
-      <%= f.submit 'Create Book' %>
+
+      <%= f.submit 'Create Book', class: 'btn btn-success' %>
     <% end %>
   </section>
 
-  <section>
+  <section class='col-md-8 offset-md-1'>
     <h2>Users</h2>
-    <table>
+    <table class='table'>
       <thead>
-        <% if @user.present? && @user.respond_to?(:get_profile_image) %>
-    <%= image_tag @user.get_profile_image(100, 100), alt: 'sample-author1.jpg' %>
-  <% end %>
-
         <tr>
           <th>image</th>
           <th>name</th>
-          <th></th>
         </tr>
       </thead>
-
       <tbody>
+        <% @users.each do |user| %>
           <tr>
-              <td><% if @user.present? && @user.respond_to?(:get_profile_image) %>
-    <%= image_tag @user.get_profile_image(100, 100), alt: 'sample-author1.jpg' %>
-  <% end %>
-              </td>
-              <td>
-                <% @users.each do |user| %>
-              <p><%= user.name %></p>
-            <% end %>
-              </td>
-            
+            <td>
+              <% if user.present? && user.respond_to?(:get_profile_image) %>
+                <%= image_tag user.get_profile_image(100, 100), alt: 'sample-author1.jpg' %>
+              <% end %>
+            </td>
+            <td><%= user.name %></td>
+            <td><%= link_to 'Show', user %></td>
           </tr>
+        <% end %>
       </tbody>
+
+
+
     </table>
   </section>
 </div>
+</div

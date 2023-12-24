@@ -1,41 +1,43 @@
-
-
-
+<div class="text-success">
+  <%= flash[:notice] %>
+</div>
 <div class="container">
-  <div class="row no-gutters">
-    <div class="col-md-5 col-sm-10 mx-2 mx-sm-auto text-center shadow-lg rounded px-0 my-5">
-      <h5 class="text-dark bg-light py-4 mb-0">User info</h5>
+  <div class="row">
+    <div class="col-md-5 col-sm-10 mx-2   ">
+      <h2 class="text-dark  py-4 mb-0">User info</h2>
       <div class="form-body p-4">
         <%= form_with model: @user, local: true do |f| %>
-          <div class="input-group mb-3">
+          <div class="form-group">
             <div class="input-group-prepend">
               <h6>Name</h6>
             </div>
-            <%= f.text_field :name, autofocus: true, class: "form-control", id: "inputName" %>
+            <%= f.text_field :name, autofocus: true, class: "form-control" %>
             <% if @user.errors.has_key?(:name) %>
-              <p class="text-danger"><%= @user.errors[:name].first %></p>
+              <p class="text-danger "><%= @user.errors[:name].first %></p>
             <% end %>
           </div>
-          
-          <div class="custom-file">
+
+          <div class="form-group">
             <h6>Image</h6>
-              <%= f.file_field :profile_image, class: 'custom-file-input', accept: "image/*", style: "display: none;" %>
-              <label class="custom-file-label" for="user_profile_image" style="text-align: left;">ファイルを選択</label>
-            </div>
+        <%= f.file_field :profile_image, class: "form-control-file user_image" %>
+            <% if @user.errors.has_key?(:profile_image) %>
+              <p class="text-danger"><%= @user.errors[:profile_image].first %></p>
+            <% end %>
+          </div>
 
-
-          <div class="input-group mb-3">
+          <div class="form-group">
             <div class="input-group-prepend">
               <h6>Introduction</h6>
             </div>
-            <%= f.text_area :introduction, id:"user_introduction", class: "form-control" %>
-            <% if @user.errors.has_key?( :introduction) %>
+            <%= f.text_area :introduction,  class: "form-control" %>
+            <% if @user.errors.has_key?(:introduction) %>
               <p class="text-danger"><%= @user.errors[:introduction].first %></p>
             <% end %>
           </div>
-          </div>
-          <%= f.submit "Update User", class:"btn btn-lg btn-block btn-info mt-5" %>
+
+          <%= f.submit "Update User", class:"btn btn-secondary" %>
         <% end %>
+        </div>
       </div>
     </div>
   </div>
