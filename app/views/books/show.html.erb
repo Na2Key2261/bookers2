@@ -23,12 +23,10 @@
           </table>
 
 
-    
+
       <div class="mt-auto">
         <p><%= link_to  edit_user_path(@user), class: "btn btn-outline-secondary btn-block" do %><i class="fas fa-user-cog"></i><% end %></p
       </div>
-    
-
 
 					<h2>New book</h1>
 					<% if @book_new.errors.any? %>
@@ -60,10 +58,10 @@
             <tr>
               <td><%= link_to(@book.user) do %>
                 <% if @user.present? && @user.respond_to?(:get_profile_image) %>
-                <%= link_to user_path(@user) do %>
+
                   <%= image_tag @user.get_profile_image(100, 100), alt: 'sample-author1.jpg' %>
                   <%= @book.user.name %>
-                  <% end %>
+
                 <% end %>
               <% end %>
               </td>
